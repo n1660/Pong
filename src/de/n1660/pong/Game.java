@@ -23,6 +23,9 @@ public class Game extends Canvas implements Runnable {
     public Racket racketL;
     public Racket racketR;
 
+    public int scoreL = 0;
+    public int scoreR = 0;
+
     private KeyListening keyListening;
 
     public Game() {
@@ -36,8 +39,8 @@ public class Game extends Canvas implements Runnable {
         window.add(this);
         window.setVisible(true);
 
-        racketL = new Racket(5);
-        racketR = new Racket(1485);
+        racketL = new Racket(5, new Color(0xFF, 0x70, 0x70));
+        racketR = new Racket(1485, new Color(0x70, 0x70, 0xFF));
         ball = new Ball(this);
 
         keyListening = new KeyListening(this);
@@ -77,6 +80,11 @@ public class Game extends Canvas implements Runnable {
             ball.render(graphics);
             racketR.render(graphics);
             racketL.render(graphics);
+
+            graphics.setColor(new Color(0xFF, 0x70, 0x70));
+            graphics.drawString(Integer.toString(scoreL), WINW/2 - 50,50);
+            graphics.setColor(new Color(0x70, 0x70, 0xFF));
+            graphics.drawString(Integer.toString(scoreR), WINW/2 + 50,50);
 
             graphics.dispose();
             bs.show();
