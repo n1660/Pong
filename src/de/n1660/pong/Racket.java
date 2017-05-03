@@ -10,19 +10,21 @@ public class Racket {
     int y;
     int w;
     int h;
+    int vel;
     Color color = new Color(0xFF, 0xFF, 0xFF);
-
-    public void RacketMove(int dy) {
-        if(((y + dy) >= (y/2)) && (y + dy) <= (Game.WINH - (y/2))) {
-            this.y += dy;
-        }
-    }
 
     public Racket (int x) {
         this.x = x;
-        this.y = 5;
+        this.y = Game.WINH/2 - h/2;
         this.w = 10;
         this.h = 80;
+        this.vel = 10;
+    }
+
+    public void RacketMove(int dy) {
+        if (((y + dy) > 0) && ((y + h + dy) < (Game.WINH))) {
+            this.y += dy;
+        }
     }
 
     public void update() {
@@ -31,6 +33,6 @@ public class Racket {
 
     public void render(Graphics graphics) {
         graphics.setColor(color);
-        graphics.drawRect(x, y, w, h);
+        graphics.fillRect(x, y, w, h);
     }
 }

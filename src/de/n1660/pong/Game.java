@@ -15,7 +15,7 @@ public class Game extends Canvas implements Runnable {
     public final static int WINH = 600;
 
     public boolean running = true;
-    public static int COLR= 0;
+    public static int COLR = 0;
     public static int COLG = 0;
     public static int COLB = 0;
 
@@ -23,9 +23,12 @@ public class Game extends Canvas implements Runnable {
     public Racket racketL;
     public Racket racketR;
 
+    private KeyListening keyListening;
+
     public Game() {
         //initialize window
         JFrame window = new JFrame("Log");
+        window.setUndecorated(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(WINW, WINH);
         window.setResizable(false);
@@ -34,8 +37,11 @@ public class Game extends Canvas implements Runnable {
         window.setVisible(true);
 
         racketL = new Racket(5);
-        racketR = new Racket(1480);
-        ball = new Ball();
+        racketR = new Racket(1485);
+        ball = new Ball(this);
+
+        keyListening = new KeyListening(this);
+        this.addKeyListener(keyListening);
 
         start();
 
@@ -66,7 +72,7 @@ public class Game extends Canvas implements Runnable {
             Graphics graphics = bs.getDrawGraphics();
 
             graphics.setColor(new Color(COLR, COLG, COLB));
-            graphics.fillRect(0, 0, WINW, WINW);
+            graphics.fillRect(0, 0, WINW, WINH);
 
             ball.render(graphics);
             racketR.render(graphics);
@@ -75,5 +81,17 @@ public class Game extends Canvas implements Runnable {
             graphics.dispose();
             bs.show();
         }
+    }
+
+    public Ball getBall() {
+        return ball;
+    }
+
+    public Racket getRacketL() {
+        return racketL;
+    }
+
+    public Racket getRacketR() {
+        return racketR;
     }
 }
