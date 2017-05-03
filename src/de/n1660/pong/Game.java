@@ -47,7 +47,6 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(keyListening);
 
         start();
-
     }
 
     public static void main(String args[]) {
